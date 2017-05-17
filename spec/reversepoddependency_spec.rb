@@ -7,10 +7,25 @@ RSpec.describe Reversepoddependency do
   end
 
   it "does something useful" do
-    podSource = Reversepoddependency::SepcAnalyse.new('/Users/qiaozhiguang/.cocoapods/repos/sankuai-ios-binaryspecs','SankuaiKit')
-    resultArr = podSource.getAnalyseResult
-    puts resultArr
-    expect(resultArr.count).not_to eq(0)
+    podSource = Reversepoddependency::SepcAnalyse.new('/Users/qiaozhiguang/.cocoapods/repos/sankuai-ios-binaryspecs','SAKAnalytics')
+    resultHash = podSource.getAnalyseResult
+	
+    puts "all Main Pods ,not contain Subspec"
+    puts "-----------------------------------"
+	resultHash.each {|key,value|
+    	puts key
+    }
+    puts "\n"
+    puts "all pods ,contain Subspec"
+    puts "-----------------------------------"
+    resultHash.each {|key,value|
+    	puts "#{key}->"
+    	puts value
+    	puts '---'
+    }
+
+
+    expect(resultHash.count).not_to eq(0)
   end
 
 end

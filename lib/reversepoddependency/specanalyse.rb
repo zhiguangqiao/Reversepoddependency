@@ -10,14 +10,29 @@ module Reversepoddependency
 		end
 
 		def getAnalyseResult
-			puts '正在分析' + @podSource.name + '...'
-			resultArr = Array.new
+			if @podSource.git?
+				puts "update repo #{@podSource.name}"
+				@podSource.update(true)
+			end
+			puts "正在分析 #{@targetPodName} 在 #{@podSource.name} 中的被依赖列表  ...\n"
+			resultHasn = Hash.new
 			@podSource.pods.collect do |podName|
-				if self.isSpecDependentTargetPod(self.getHighVersionSpec(podName)) == 1
-					resultArr.push(podName)
+				podspecHighV = self.getHighVersionSpec(podName)
+				tmpArr = []
+				if self.isSpecDependentTargetPod(podspecHighV) == 1
+					tmpArr.push(podName)
+				end
+
+				podspecHighV.subspecs.each do |subspec|
+					if self.isSpecDependentTargetPod(subspec) == 1
+						tmpArr.push(subspec.name)
+					end
+				end
+				if tmpArr.count > 0
+					resultHasn[podName] = tmpArr
 				end
 			end
-			return resultArr
+			return resultHasn
 		end
 
 		def getHighVersionSpec(podName)
@@ -27,11 +42,11 @@ module Reversepoddependency
 
 		def isSpecDependentTargetPod(spec)
 			spec.dependencies.each do |dependedPod|
-				if dependedPod.name == @targetPodName
+				if dependedPod.name.include?(@targetPodName)
 					return 1
 				end
-				return 0
 			end
+			return 0
 		end
 	end
 end
