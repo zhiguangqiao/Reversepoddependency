@@ -1,8 +1,7 @@
 # Reversepoddependency
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/reversepoddependency`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+cocoapods 辅助工具，用来分析 podspec 之间的依赖关系 ，目前只支持反向依赖的分析 
+默认会 update repo 库，如果在官方的 master  repo 中分析 可能会耗时比较长
 
 ## Installation
 
@@ -22,7 +21,10 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+specbackwarddependency repopath podname
+# 例如 specbackwarddependency ~/.cocoapods/repos/master AFNetworking
+```
 
 ## Development
 

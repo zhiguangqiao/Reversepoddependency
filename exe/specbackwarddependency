@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require_relative "../lib/reversepoddependency/specanalyse"
+require "reversepoddependency"
 
 podSource = Reversepoddependency::SepcAnalyse.new(ARGV[0],ARGV[1])
 resultHash = podSource.getAnalyseResult
