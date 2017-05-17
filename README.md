@@ -1,7 +1,8 @@
 # Reversepoddependency
 
-cocoapods 辅助工具，用来分析 podspec 之间的依赖关系 ，目前只支持反向依赖的分析 
-默认会 update repo 库，如果在官方的 master  repo 中分析 可能会耗时比较长
+cocoapods 辅助工具，用来分析 podspec 之间的依赖关系 ，目前只支持反向依赖的分析 ,
+以 AFNetworking 为例，specbackwarddependency ~/.cocoapods/repos/master AFNetworking 将会打印 master repo 中所有依赖了 AFNetworking 的podspec的名字
+默认会 update repo 库，如果在 cocoapods 官方的 master  repo 中分析（podspec非常多），会耗时比较长
 
 ## Installation
 
